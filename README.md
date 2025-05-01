@@ -1,1 +1,0 @@
-# setup-sftp-ubuntu-24.04
