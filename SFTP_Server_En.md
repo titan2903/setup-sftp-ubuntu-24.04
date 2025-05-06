@@ -47,7 +47,16 @@
    ```
    - **Explanation**: Creates a new user `sftpuser`, adds it to the `sftp_users` group, and ensures the user cannot log in via SSH shell by setting the shell to `/usr/sbin/nologin`.
 
-## 5. **Adding Configuration to the `sshd_config` File**
+## 5. Adding Password for `sftpuser`
+   After creating the sftpuser, you need to assign a password so the user can authenticate during the SFTP connection:
+
+   ```
+   sudo passwd sftpuser
+   ```
+
+   - **Explanation**: This command will prompt you to set a password for the sftpuser. The password will be required when the user attempts to authenticate using SFTP.
+
+## 6. **Adding Configuration to the `sshd_config` File**
    This step involves editing the SSH configuration file to specify access restrictions for the `sftp_users` group and allow only SFTP access, not shell access.
 
    - Open the SSH configuration file (`sshd_config`) for editing:
@@ -70,7 +79,7 @@
        - `AllowTcpForwarding no`: Disables TCP forwarding to enhance security.
        - `X11Forwarding no`: Disables X11 forwarding, preventing remote graphical access.
 
-## 6. **Restarting the SSH Service**
+## 7. **Restarting the SSH Service**
    After modifying the configuration file, restart the SSH service to apply the changes.
 
    ```
@@ -78,7 +87,7 @@
    ```
    - **Explanation**: Restarts the SSH service to apply the changes made to the configuration file.
 
-## 7. **Setting Up Directories and Permissions for the SFTP User**
+## 8. **Setting Up Directories and Permissions for the SFTP User**
    - Adjust permissions on the SFTP user's home directory and create an `uploads` directory where files can be uploaded via SFTP.
 
    ```

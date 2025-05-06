@@ -47,7 +47,16 @@
    ```
    - **Penjelasan**: Membuat pengguna baru `sftpuser` yang akan masuk dalam grup `sftp_users`. Opsi `-s /usr/sbin/nologin` memastikan pengguna ini tidak dapat login melalui terminal biasa, hanya dapat menggunakan SFTP.
 
-## 5. **Menambahkan Konfigurasi di File sshd_config**
+## 5. Menambahkan Password untuk Pengguna `sftpuser`
+   Setelah membuat pengguna sftpuser, Anda perlu menambahkan password agar pengguna bisa melakukan autentikasi saat menggunakan SFTP:
+
+   ```
+   sudo passwd sftpuser
+   ```
+
+   - **Penjelasan**: Perintah ini akan meminta Anda untuk memasukkan password baru untuk pengguna sftpuser. Password ini digunakan saat pengguna ingin login dan mengakses server melalui SFTP.
+
+## 6. **Menambahkan Konfigurasi di File sshd_config**
    Langkah ini mengedit file konfigurasi SSH untuk menentukan akses yang dibatasi bagi grup `sftp_users` dan hanya mengizinkan akses SFTP, bukan akses shell.
 
    - Buka file konfigurasi SSH `sshd_config` untuk diubah:
@@ -70,7 +79,7 @@
        - `AllowTcpForwarding no`: Menonaktifkan pemajuan TCP untuk meningkatkan keamanan.
        - `X11Forwarding no`: Menonaktifkan pemajuan X11 untuk mencegah akses grafis jarak jauh yang tidak diperlukan.
 
-## 6. **Restart Layanan SSH**
+## 7. **Restart Layanan SSH**
    Setelah mengubah file konfigurasi, Anda perlu merestart layanan SSH agar perubahan diterapkan.
 
    ```
@@ -78,7 +87,7 @@
    ```
    - **Penjelasan**: Merestart layanan SSH untuk menerapkan perubahan yang telah dilakukan pada file konfigurasi.
 
-## 7. **Menyiapkan Direktori dan Izin Pengguna SFTP**
+## 8. **Menyiapkan Direktori dan Izin Pengguna SFTP**
    - Mengatur izin pada direktori pengguna SFTP dan membuat direktori `uploads` untuk file yang dapat diakses melalui SFTP.
 
    ```
